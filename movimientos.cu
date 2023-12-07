@@ -385,8 +385,6 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				dir = dircaballo[j];
 				cas_aux = cas + dir;
                 
-
-				
 				if(FILAsBrd[cas_aux]==OFFBOARD) {	
                      
                     pce_cas_aux=t->pieces[cas_aux];

@@ -3,10 +3,10 @@
 #include "definiciones.h"
 //#define SQOFFBOARD(sq) (FILAsBrd[sq]==OFFBOARD)
 
-const int KnDir[8] = { -8, -19,	-21, -12, 8, 19, 21, 12 };
-const int RkDir[4] = { -1, -10,	1, 10 };
-const int BiDir[4] = { -9, -11, 11, 9 };
-const int KiDir[8] = { -1, -10,	1, 10, -9, -11, 11, 9 };
+const __constant__ int KnDir[8] = { -8, -19,	-21, -12, 8, 19, 21, 12 };
+const __constant__ int RkDir[4] = { -1, -10,	1, 10 };
+const __constant__ int BiDir[4] = { -9, -11, 11, 9 };
+const __constant__ int KiDir[8] = { -1, -10,	1, 10, -9, -11, 11, 9 };
 
 /***********************************************************/
 /* Funcion: SqAttacked                           
