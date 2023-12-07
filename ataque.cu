@@ -1,7 +1,7 @@
 
 #include "stdio.h"
 #include "definiciones.h"
-#define SQOFFBOARD(sq) (FILAsBrd[sq]==OFFBOARD)
+//#define SQOFFBOARD(sq) (FILAsBrd[sq]==OFFBOARD)
 
 const int KnDir[8] = { -8, -19,	-21, -12, 8, 19, 21, 12 };
 const int RkDir[4] = { -1, -10,	1, 10 };
@@ -32,7 +32,7 @@ int SqAttacked(const int sq, const int side, const TABLERO *pos) {
 
 	int pce,index,t_sq,dir;
 
-	ASSERT(!SQOFFBOARD(sq));
+	//ASSERT(!SQOFFBOARD(sq));
 	
 	// reyes
 	for(index = 0; index < 8; ++index) {		

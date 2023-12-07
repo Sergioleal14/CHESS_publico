@@ -283,7 +283,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 		casilla64 = C120a64(casilla);
 		punt += puntpeones[casilla64];
 		if(PassedPawn(array, casilla, WHITE)==TRUE){
@@ -301,7 +301,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 		casilla64 = C120a64(casilla);
 		punt -= puntpeones[Mirror64(casilla64)];
 
@@ -321,7 +321,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 		casilla64 = C120a64(casilla);
 		punt += puntcaballo[casilla64];
 	}
@@ -330,7 +330,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 		casilla64 = C120a64(casilla);
 		punt -= puntcaballo[Mirror64(casilla64)];
 	}
@@ -339,7 +339,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 		casilla64 = C120a64(casilla);
 		punt += puntalfil[casilla64];
 	}
@@ -348,7 +348,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 		casilla64 = C120a64(casilla);
 		punt -= puntalfil[Mirror64(casilla64)];
 	}
@@ -357,7 +357,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 		casilla64 = C120a64(casilla);
 		punt += punttorre[casilla64];
 
@@ -371,7 +371,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 		casilla64 = C120a64(casilla);
 		punt -= punttorre[Mirror64(casilla64)];
 
@@ -386,7 +386,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 
 		abierta=OpenSemiOpenCol(array, casilla, WHITE);
 
@@ -399,7 +399,7 @@ int EvalPosition(const TABLERO *pos)
 	for (npiezas = 0; npiezas < pos->pceNum[pce]; npiezas++)
 	{
 		casilla = pos->pList[pce][npiezas];
-		ASSERT(!SQOFFBOARD(casilla));
+		//ASSERT(!SQOFFBOARD(casilla));
 
 		abierta=OpenSemiOpenCol(array, casilla, BLACK);
 

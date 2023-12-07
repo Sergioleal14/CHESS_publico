@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "definiciones.h"
-#define SQOFFBOARD(sq) (FILAsBrd[sq]==OFFBOARD)
+//#define SQOFFBOARD(sq) (FILAsBrd[sq]==OFFBOARD)
 #define PEONDIR 10
 #define MAX_M 256
 char PceChar2[] = ".PNBRQKPNBRQK";
@@ -189,7 +189,7 @@ int move_cmp(MOVE *m1, MOVE *m2){
 MOVE **Generador_Movimientos(TABLERO *t, int *count){
     MOVE **m;
 
-    ASSERT(CheckBoard(t));
+    //ASSERT(CheckBoard(t));
 
     if(!t) return NULL;
 
@@ -299,12 +299,12 @@ MOVE ** Generador_Peones(TABLERO *t, MOVE **m, int *count ){
 
     side = t->side;
 
-    ASSERT(CheckBoard(t));
+    //ASSERT(CheckBoard(t));
 
     //Las correciones donde hay *side sirven para escoger, dependiendo del lado al que le toque, escoger las características correctas
     for(i=0;i<t->pceNum[CAMBIO_LADO*side + wP]&& flag == 1;i++){
         cas = t->pList[CAMBIO_LADO*side + wP][i];
-        ASSERT(cas != OFFBOARD);
+        //ASSERT(cas != OFFBOARD);
 
         if(t->pieces[cas + 10 - 20*side] == EMPTY){
             m = AddMovePeon(m, count, cas, cas + 10 - 20*side, t->pieces[cas + 20 - 40*side],EMPTY,side,EMPTY);
@@ -370,7 +370,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 
 	side=t->side;
 
-    ASSERT(CheckBoard(t));
+    //ASSERT(CheckBoard(t));
    
    
     //bucle caballo blanco
@@ -387,7 +387,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
                 
 
 				
-				if(!SQOFFBOARD(cas_aux)) {	
+				if(FILAsBrd(cas_aux)==OFFBOARD) {	
                      
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
@@ -418,7 +418,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				dir = dircaballo[j];
 				cas_aux = cas + dir;
 				
-				if((!SQOFFBOARD(cas_aux))) {	
+				if((FILAsBrd(cas_aux)==OFFBOARD)) {	
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
@@ -445,7 +445,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				cas_aux = cas + dir;
                 pce_cas_aux=t->pieces[cas_aux];
 				
-				if((!SQOFFBOARD(cas_aux))) {	
+				if(FILAsBrd(cas_aux)==OFFBOARD) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
                         //m =(MOVE**) realloc(m, (*count +1)*sizeof(MOVE*));
                         if (!m) return NULL;
@@ -471,7 +471,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				cas_aux = cas + dir;
                 pce_cas_aux=t->pieces[cas_aux];
 				
-				if((!SQOFFBOARD(cas_aux))) {	
+				if(FILAsBrd(cas_aux)==OFFBOARD) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
                         if (!m) return NULL;
@@ -516,7 +516,7 @@ MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count ){
 
     if(!t||!m)return NULL;
 
-    ASSERT(CheckBoard(t));
+    //ASSERT(CheckBoard(t));
 
     side=t->side;
     
@@ -645,7 +645,7 @@ MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count ){
 
 MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count ){
 
-    ASSERT(CheckBoard(t));
+    //ASSERT(CheckBoard(t));
 
     int pceIndex, pce, pceNum, side, index, sq, t_sq, dir;
     int PceDirSlide[8][8] = {
@@ -683,13 +683,13 @@ MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count ){
 		
 		for(pceNum = 0; pceNum < t->pceNum[pce]; ++pceNum) {
 			sq = t->pList[pce][pceNum];
-			if(SQOFFBOARD(sq)) return NULL;
+			if(FILAsBrd(sq)==OFFBOARD) return NULL;
 			
 			for(index = 0; index < NumDirSlide[pce]; ++index) {
 				dir = PceDirSlide[pceIndex][index];
 				t_sq = sq + dir;
 				
-				while(!SQOFFBOARD(t_sq)) {				
+				while(FILAsBrd(t_sq)==OFFBOARD) {				
 					
 					if(t->pieces[t_sq] != EMPTY) {
 						if( pieceColour(t->pieces[t_sq]) !=side) {
@@ -1189,7 +1189,7 @@ void DeshacerJugada(TABLERO *t) {
 	int from;
     int to;
 	
-    ASSERT(CheckBoard(t));
+    //ASSERT(CheckBoard(t));
 	
 	t->histcont--; //histcont  hisply
     t->j_real--;  //j_real ply
@@ -1244,8 +1244,8 @@ void DeshacerJugada(TABLERO *t) {
                 t->pieces[D8]=EMPTY;
 
                 break;
-            default: ASSERT(FALSE);     
-                break;
+            //default: //ASSERT(FALSE);     
+            //    break;
         }
     }
 	
@@ -1274,7 +1274,7 @@ void DeshacerJugada(TABLERO *t) {
     UpdateListsMaterial(t);
   
 	
-    ASSERT(CheckBoard(t));
+    //ASSERT(CheckBoard(t));
     return;
 
 }

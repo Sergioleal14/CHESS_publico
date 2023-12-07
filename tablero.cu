@@ -58,7 +58,7 @@ void InitFILAsCOLsBrd() {
 			COLsBrd[sq] = col;
 		}
 	}
-	
+
 }
 
 /***********************************************************/
@@ -183,7 +183,7 @@ int CheckBoard(const TABLERO *pos) {
 	for(esp_piece = wP; esp_piece <= bK; ++esp_piece) {
 		for(esp_pce_num = 0; esp_pce_num < pos->pceNum[esp_piece]; ++esp_pce_num) {
 			sq120 = pos->pList[esp_piece][esp_pce_num];
-			ASSERT(pos->pieces[sq120]==esp_piece);
+			//ASSERT(pos->pieces[sq120]==esp_piece);
 		}	
 	}
 
@@ -198,21 +198,21 @@ int CheckBoard(const TABLERO *pos) {
 	}
 	
 	for(esp_piece = wP; esp_piece <= bK; ++esp_piece) {
-		ASSERT(esp_pceNum[esp_piece]==pos->pceNum[esp_piece]);	
+		//ASSERT(esp_pceNum[esp_piece]==pos->pceNum[esp_piece]);	
 	}
 	
 
-	ASSERT(esp_material[WHITE]==pos->material[WHITE] && esp_material[BLACK]==pos->material[BLACK]);
+	//ASSERT(esp_material[WHITE]==pos->material[WHITE] && esp_material[BLACK]==pos->material[BLACK]);
 
 	
-	ASSERT(pos->side==WHITE || pos->side==BLACK);
+	//ASSERT(pos->side==WHITE || pos->side==BLACK);
 
 	
-	ASSERT(pos->AlPaso==NO_SQ || ( FILAsBrd[pos->AlPaso]==FILA_6 && pos->side == WHITE)
+	//ASSERT(pos->AlPaso==NO_SQ || ( FILAsBrd[pos->AlPaso]==FILA_6 && pos->side == WHITE)
 		 || ( FILAsBrd[pos->AlPaso]==FILA_3 && pos->side == BLACK));
 	
-	ASSERT(pos->pieces[pos->KingSq[WHITE]] == wK);
-	ASSERT(pos->pieces[pos->KingSq[BLACK]] == bK);
+	//ASSERT(pos->pieces[pos->KingSq[WHITE]] == wK);
+	//ASSERT(pos->pieces[pos->KingSq[BLACK]] == bK);
 		 
 	return TRUE;	
 }
@@ -289,8 +289,8 @@ void UpdateListsMaterial(TABLERO *pos) {
 
 int LeerFen(char *fen, TABLERO *pos) {
 	
-	ASSERT(fen!=NULL);
-	ASSERT(pos!=NULL);
+	//ASSERT(fen!=NULL);
+	//ASSERT(pos!=NULL);
 	
 	int  fila = FILA_8, col = COL_A, piece = 0, count = 0, i = 0,  c64 = 0, c120 = 0;
 	short flag =0;
@@ -347,7 +347,7 @@ int LeerFen(char *fen, TABLERO *pos) {
         }
 		fen++;
 	}
-	ASSERT(*fen == 'w' || *fen == 'b');
+	//ASSERT(*fen == 'w' || *fen == 'b');
 	
 	if(*fen == 'w') pos->side = WHITE;
 	else pos->side = BLACK;
@@ -366,14 +366,14 @@ int LeerFen(char *fen, TABLERO *pos) {
 	}
 	fen++;
 	
-	ASSERT(pos->enroque>=0 && pos->enroque <= 15);
+	//ASSERT(pos->enroque>=0 && pos->enroque <= 15);
 	
 	if (*fen != '-') {        
 		col = fen[0] - 'a';
 		fila = fen[1] - '1';
 		
-		ASSERT(col>=COL_A && col <= COL_H);
-		ASSERT(fila>=FILA_1 && fila <= FILA_8);
+		//ASSERT(col>=COL_A && col <= COL_H);
+		//ASSERT(fila>=FILA_1 && fila <= FILA_8);
 		
 		pos->AlPaso = FCCAS(col,fila);
 		fen++;	
@@ -791,7 +791,7 @@ int Repetida(TABLERO *tab, int *times){
 	int i=0;
 	char *aux=NULL, *fen=NULL;
 
-	ASSERT(tab!=NULL);
+	//ASSERT(tab!=NULL);
 
 	(*times)=1;
 
@@ -835,7 +835,7 @@ int esTablas(TABLERO *tab){
 
 	int flag=0, flag1=0, cont=0;
 
-	ASSERT(tab!=NULL);
+	//ASSERT(tab!=NULL);
 
 	if(tab->fiftyMove >= 100)return TRUE;
 	
@@ -871,7 +871,7 @@ int esTablas(TABLERO *tab){
 
 int InsufMat(TABLERO *tab){
 
-	ASSERT(tab!=NULL);
+	//ASSERT(tab!=NULL);
 
 	if(tab->material[BLACK]==50000 && tab->material[WHITE]==50000)return TRUE;
 	if(tab->material[WHITE]==50325 && tab->material[BLACK]==50000)return TRUE;

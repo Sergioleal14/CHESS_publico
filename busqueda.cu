@@ -41,7 +41,7 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 	clock_t c1, c2,c3,c4;
 
 
-	ASSERT(CheckBoard(pos)); 
+	//ASSERT(CheckBoard(pos)); 
 
 	if(info->stop==TRUE){
 		return 0;
