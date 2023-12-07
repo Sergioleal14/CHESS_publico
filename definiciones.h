@@ -29,7 +29,7 @@
 /* Array que le da un valor material a cada pieza. Cada posición corresponde a PieceVal[pieza]
 /***********************************************************/
 
-static int PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
+static __constant__ int PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
 
 /***********************************************************/
 /* Enumeraciones                             
