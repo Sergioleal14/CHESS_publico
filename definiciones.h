@@ -284,4 +284,3 @@ int Mirror64(int sq64);
 MOVE* SearchPosition(TABLERO *pos, INFO  *info);
 static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MOVE** Best);
 
-#endif
