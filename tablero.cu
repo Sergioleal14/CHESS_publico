@@ -192,9 +192,9 @@ int CheckBoard(const TABLERO *pos) {
 		esp_material[colour] += PieceVal[esp_piece];
 	}
 	
-	for(esp_piece = wP; esp_piece <= bK; ++esp_piece) {
+	//for(esp_piece = wP; esp_piece <= bK; ++esp_piece) {
 		//ASSERT(esp_pceNum[esp_piece]==pos->pceNum[esp_piece]);	
-	}
+	//}
 	
 
 	//ASSERT(esp_material[WHITE]==pos->material[WHITE] && esp_material[BLACK]==pos->material[BLACK]);
@@ -204,7 +204,7 @@ int CheckBoard(const TABLERO *pos) {
 
 	
 	//ASSERT(pos->AlPaso==NO_SQ || ( FILAsBrd[pos->AlPaso]==FILA_6 && pos->side == WHITE)
-		 || ( FILAsBrd[pos->AlPaso]==FILA_3 && pos->side == BLACK));
+		// || ( FILAsBrd[pos->AlPaso]==FILA_3 && pos->side == BLACK));
 	
 	//ASSERT(pos->pieces[pos->KingSq[WHITE]] == wK);
 	//ASSERT(pos->pieces[pos->KingSq[BLACK]] == bK);
