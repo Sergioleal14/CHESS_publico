@@ -250,7 +250,7 @@ extern void ResetBoard(TABLERO *pos);
 extern int LeerFen(char *fen, TABLERO *pos);
 extern void PrintBoard(const TABLERO *pos);
 extern void UpdateListsMaterial(TABLERO *pos);
-extern int CheckBoard(const TABLERO *pos);
+extern __host__ __device__ int CheckBoard(const TABLERO *pos);
 extern int C120a64(int c120);
 extern int C64a120(int c64);
 extern void Free_tablero(TABLERO *tab);
@@ -268,13 +268,13 @@ int FinPartida(TABLERO *tab);
 extern int SqAttacked(const int sq, const int side, const TABLERO *pos);
 
 //movimientos.c
-extern MOVE **Generador_Peones(TABLERO *t, MOVE **m, int *count );
+extern __host__ __device__ MOVE **Generador_Peones(TABLERO *t, MOVE **m, int *count );
 extern __host__ __device__ MOVE **Generador_Movimientos(TABLERO *t, int *count);
-extern MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count);
+extern __host__ __device__ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count);
 int print_moves(MOVE **m, int count);
 void free_move(MOVE *m);
-extern MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count );
-extern MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count );
+extern __host__ __device__ MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count );
+extern __host__ __device__ MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count );
 extern int PrintMove(MOVE *mt);
 extern int HacerJugada(TABLERO *t,MOVE *m);
 extern void DeshacerJugada(TABLERO *pos);
@@ -283,7 +283,7 @@ extern S_UNDO *create_UNDO (MOVE *jugada);
 extern MOVE *move_copy(MOVE*m);
 extern MOVE *create_move();
 extern void free_move(MOVE *m);
-extern MOVE* insert_move(int castle, int from, int to, int pieza, int captura, int corona, int paso);
+extern __host__ __device__ MOVE* insert_move(int castle, int from, int to, int pieza, int captura, int corona, int paso);
 int move_cmp(MOVE *m1, MOVE *m2);
 //comprobacion.c
 
