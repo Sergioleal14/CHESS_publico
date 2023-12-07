@@ -259,7 +259,6 @@ int Menu_juego(TABLERO *tab){
     int flag1;
 
     char bando='\0';
-    char entradajugada[MAXSTRJUGADA]="\0";
 
     int acabar = FALSE;
 

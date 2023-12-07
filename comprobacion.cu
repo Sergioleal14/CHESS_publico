@@ -21,7 +21,6 @@ long nHojas;
 void Comprobacion(int prof, TABLERO *pos) {
 
     int count=0;
-    int aux;
 
 
     ASSERT(CheckBoard(pos));  

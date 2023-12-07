@@ -232,7 +232,7 @@ MOVE **Generador_Movimientos(TABLERO *t, int *count){
 /***********************************************************/
 
 
-MOVE ** AddMovePeon (MOVE **m,  int *count, int cas, int to, int to2, int captura, int side, int paso){
+__host__ __device__ MOVE ** AddMovePeon (MOVE **m,  int *count, int cas, int to, int to2, int captura, int side, int paso){
     if (!m) return NULL;
 
     if(Cas_Fila(cas) == FILA_7 - side*5){
@@ -291,7 +291,7 @@ MOVE ** Generador_Peones(TABLERO *t, MOVE **m, int *count ){
 
     int i;
     int side;
-    int cas = 0, cas_temp=0;
+    int cas = 0;
     int pieza = EMPTY;
     short flag = 1;
 
@@ -360,11 +360,9 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
     int i,j;
     int dir;
     int side;
-    int cas = 0, cas_temp=0;
+    int cas = 0;
     int cas_aux;
     int pce_cas_aux;
-    int pieza = EMPTY;
-    short flag = 1;
     int dircaballo[8]={-8,-19,-21,-12,8,19,21,12};
     int dirrey[8]={-1,-10,1,10,-9,-11,9,11};
     
@@ -1186,7 +1184,7 @@ int HacerJugada(TABLERO *t,MOVE *m){
 
 
 void DeshacerJugada(TABLERO *t) {
-    int col,pce,flag,i,captura,promo;
+    int pce,captura,promo;
     MOVE * move;
 	int from;
     int to;
