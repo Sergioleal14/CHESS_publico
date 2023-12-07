@@ -2,7 +2,7 @@
 #include "definiciones.h"
 #define SQOFFBOARD(sq) (FILAsBrd[sq]==OFFBOARD)
 #define PEONDIR 10
-
+#define MAX_M 256
 char PceChar2[] = ".PNBRQKPNBRQK";
 
 /***********************************************************/
@@ -193,7 +193,7 @@ MOVE **Generador_Movimientos(TABLERO *t, int *count){
 
     if(!t) return NULL;
 
-    m = (MOVE**) malloc(sizeof(MOVE*));
+    m = (MOVE**) malloc(MAX_M*sizeof(MOVE*));
     m[0] = insert_move(0,A1,A1,0,0,0,0);
     *count = 1;
 
@@ -237,7 +237,7 @@ MOVE ** AddMovePeon (MOVE **m,  int *count, int cas, int to, int to2, int captur
 
     if(Cas_Fila(cas) == FILA_7 - side*5){
         
-        m = (MOVE**) realloc(m,(*count + 4)*sizeof(MOVE*));
+        //m = (MOVE**) realloc(m,(*count + 4)*sizeof(MOVE*));
         if (!m) return NULL;
         m[*count] = insert_move(EMPTY,cas, to,CAMBIO_LADO*side + wP, captura, CAMBIO_LADO*side + wN, paso);
         (*count) ++;
@@ -251,7 +251,7 @@ MOVE ** AddMovePeon (MOVE **m,  int *count, int cas, int to, int to2, int captur
     }
     else if (Cas_Fila(cas) == FILA_2 +side*5 && captura == EMPTY && to2 == EMPTY){
 
-        m = (MOVE**)realloc(m, (*count + 2)*sizeof(MOVE*));
+        //m = (MOVE**)realloc(m, (*count + 2)*sizeof(MOVE*));
         if (!m) return NULL;
         m[*count] = insert_move(EMPTY,cas, to,CAMBIO_LADO*side + wP, captura, EMPTY, paso);
         (*count)++;
@@ -260,7 +260,7 @@ MOVE ** AddMovePeon (MOVE **m,  int *count, int cas, int to, int to2, int captur
 
     }
     else{
-        m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
+        //m = (MOVE**)//realloc(m, (*count +1)*sizeof(MOVE*));
         if (!m) return NULL;
         m[*count] = insert_move(EMPTY,cas, to,CAMBIO_LADO*side + wP, captura, EMPTY, paso);
         (*count)++;
@@ -394,7 +394,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
                        
-                        m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
+                        //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
                         if (!m) return NULL;
                       
 
@@ -423,7 +423,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				if((!SQOFFBOARD(cas_aux))) {	
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
-                        m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
+                        //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
                         if (!m) return NULL;
                       
 
@@ -449,7 +449,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				
 				if((!SQOFFBOARD(cas_aux))) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
-                        m =(MOVE**) realloc(m, (*count +1)*sizeof(MOVE*));
+                        //m =(MOVE**) realloc(m, (*count +1)*sizeof(MOVE*));
                         if (!m) return NULL;
                       
 
@@ -475,7 +475,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				
 				if((!SQOFFBOARD(cas_aux))) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
-                        m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
+                        //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
                         if (!m) return NULL;
                       
 
@@ -541,7 +541,7 @@ MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count ){
             }
             if(flag==1){
 
-                m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
+                //m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
 				m[*count] = insert_move(WKCA,EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY);
                 (*count) ++;
 
@@ -560,7 +560,7 @@ MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count ){
             if(flag == 1) flag = (t->pieces[sq-3] == EMPTY);
             if(flag==1){
 
-                m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
+                //m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
 				m[*count] = insert_move(WQCA,EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY);
                 (*count) ++;
 
@@ -589,7 +589,7 @@ MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count ){
             if(flag == 1) flag = (t->pieces[sq-3] == EMPTY);
             if(flag==1){
 
-                m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
+                //m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
 				m[*count] = insert_move(BQCA,EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY);
                 (*count) ++;
                 
@@ -612,7 +612,7 @@ MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count ){
             }
             if(flag==1){
 
-                m =(MOVE**) realloc(m,(*count + 1)*sizeof(MOVE*));
+                //m =(MOVE**) realloc(m,(*count + 1)*sizeof(MOVE*));
 				m[*count] = insert_move(BKCA,EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY);
                 (*count) ++;
 
@@ -696,13 +696,13 @@ MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count ){
 					if(t->pieces[t_sq] != EMPTY) {
 						if( pieceColour(t->pieces[t_sq]) !=side) {
                             
-                            m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
+                            //m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
 							m[*count] = insert_move(EMPTY,sq, t_sq, pce, t->pieces[t_sq], EMPTY, EMPTY);
                             (*count) ++;
 						}
 						break;
 					}	
-					m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
+					//m = (MOVE**)realloc(m,(*count + 1)*sizeof(MOVE*));
 					m[*count] = insert_move(EMPTY,sq, t_sq, pce, EMPTY, EMPTY, EMPTY);
                     
                     (*count) ++;

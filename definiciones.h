@@ -20,7 +20,7 @@ printf("On %s ",__DATE__); \
 printf("At %s ",__TIME__); \
 printf("In File %s ",__FILE__); \
 printf("At Line %d\n",__LINE__); \
-exit(1);}
+return;}
 #endif
 
 #define NUM_CASILLAS 120
@@ -265,7 +265,7 @@ int FinPartida(TABLERO *tab);
 
 
 // ataque.c
-extern int SqAttacked(const int sq, const int side, const TABLERO *pos);
+extern __host__ __device__ int SqAttacked(const int sq, const int side, const TABLERO *pos);
 
 //movimientos.c
 extern __host__ __device__ MOVE **Generador_Peones(TABLERO *t, MOVE **m, int *count );
