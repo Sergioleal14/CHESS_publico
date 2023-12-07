@@ -3,6 +3,9 @@
 #define DEFS_H
 
 #include "stdlib.h"
+#include <stdio.h>
+#include <cuda.h>
+#include <cuda_runtime.h>
 #include <string.h>
 
 #define DEBUG
@@ -266,7 +269,7 @@ extern int SqAttacked(const int sq, const int side, const TABLERO *pos);
 
 //movimientos.c
 extern MOVE **Generador_Peones(TABLERO *t, MOVE **m, int *count );
-extern MOVE **Generador_Movimientos(TABLERO *t, int *count);
+extern __host__ __device__ MOVE **Generador_Movimientos(TABLERO *t, int *count);
 extern MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count);
 int print_moves(MOVE **m, int count);
 void free_move(MOVE *m);
