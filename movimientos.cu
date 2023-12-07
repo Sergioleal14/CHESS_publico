@@ -668,7 +668,7 @@ MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count ){
     int LoopSlidePce[8] = {
     wB, wR, wQ, 0, bB, bR, bQ, 0
     };
-
+//
     int LoopSlideIndex[2] = { 0, 4 };
 
 
