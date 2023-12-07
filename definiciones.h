@@ -20,7 +20,7 @@ printf("On %s ",__DATE__); \
 printf("At %s ",__TIME__); \
 printf("In File %s ",__FILE__); \
 printf("At Line %d\n",__LINE__); \
-return;}
+return 0;}
 #endif
 
 #define NUM_CASILLAS 120
@@ -235,7 +235,7 @@ extern int PieceMin[13];
 
 extern int PieceCol[13];*/
 
-extern __host__ __device__ int FILAsBrd[NUM_CASILLAS];
+extern int FILAsBrd[NUM_CASILLAS];
 extern int COLsBrd[NUM_CASILLAS];
 
 /* FUNCTIONS */
