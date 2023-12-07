@@ -28,7 +28,6 @@ const int KiDir[8] = { -1, -10,	1, 10, -9, -11, 11, 9 };
 /* en las que estas se encuentran si están o no atacando la casilla en cuestión.
 /***********************************************************/
 
-
 int SqAttacked(const int sq, const int side, const TABLERO *pos) {
 
 	int pce,index,t_sq,dir;

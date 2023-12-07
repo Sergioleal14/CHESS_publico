@@ -235,7 +235,7 @@ extern int PieceMin[13];
 
 extern int PieceCol[13];*/
 
-extern int FILAsBrd[NUM_CASILLAS];
+extern __host__ __device__ int FILAsBrd[NUM_CASILLAS];
 extern int COLsBrd[NUM_CASILLAS];
 
 /* FUNCTIONS */
@@ -245,7 +245,7 @@ extern void InitFILAsCOLsBrd();
 
 
 // tablero.c
-extern int pieceColour(int pce);
+extern __host__ __device__ int pieceColour(int pce);
 extern void ResetBoard(TABLERO *pos);
 extern int LeerFen(char *fen, TABLERO *pos);
 extern void PrintBoard(const TABLERO *pos);
@@ -281,7 +281,7 @@ extern void DeshacerJugada(TABLERO *pos);
 extern void free_UNDO(S_UNDO * u);
 extern S_UNDO *create_UNDO (MOVE *jugada);
 extern MOVE *move_copy(MOVE*m);
-extern MOVE *create_move();
+extern __host__ __device__ MOVE *create_move();
 extern void free_move(MOVE *m);
 extern __host__ __device__ MOVE* insert_move(int castle, int from, int to, int pieza, int captura, int corona, int paso);
 int move_cmp(MOVE *m1, MOVE *m2);
