@@ -30,7 +30,7 @@ int main() {
 	INFO *info;
 
 	tab=Create_tablero();
-	InitFILAsCOLsBrd();
+	//InitFILAsCOLsBrd();
 
 	LeerFen(START_FEN, tab);
 
