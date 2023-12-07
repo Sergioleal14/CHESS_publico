@@ -1,16 +1,9 @@
-
-#ifndef DEFS_H
-#define DEFS_H
-
 #include "stdlib.h"
 #include <stdio.h>
 #include <cuda.h>
 #include <cuda_runtime.h>
 #include <string.h>
 
-#define DEBUG
-
-#ifndef DEBUG
 
 #define NUM_CASILLAS 120
 #define CAMBIO_LADO 6 
