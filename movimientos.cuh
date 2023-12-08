@@ -376,7 +376,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
     //bucle caballo blanco
     printf("COUNT VALE: %d\n", *count);
    if(side==WHITE){
-    printf("at least I know I am white");
+    printf("at least I know I am white\n");
 	for(i=0; i< t->pceNum[2] ; ++i) {
 			
             cas = t->pList[2][i];
@@ -386,7 +386,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				dir = dircaballo[j];
 				cas_aux = cas + dir;
                 
-				if(FILAsBrd[cas_aux]==OFFBOARD) {	
+				if(FILAsBrd[cas_aux]!=OFFBOARD) {	
                      
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
@@ -418,7 +418,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				dir = dircaballo[j];
 				cas_aux = cas + dir;
 				
-				if((FILAsBrd[cas_aux]==OFFBOARD)) {	
+				if((FILAsBrd[cas_aux]!=OFFBOARD)) {	
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
@@ -445,7 +445,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				cas_aux = cas + dir;
                 pce_cas_aux=t->pieces[cas_aux];
 				
-				if(FILAsBrd[cas_aux]==OFFBOARD) {	
+				if(FILAsBrd[cas_aux]!=OFFBOARD) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
                         //m =(MOVE**) realloc(m, (*count +1)*sizeof(MOVE*));
                         //if (!m) return NULL;
@@ -471,7 +471,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				cas_aux = cas + dir;
                 pce_cas_aux=t->pieces[cas_aux];
 				
-				if(FILAsBrd[cas_aux]==OFFBOARD) {	
+				if(FILAsBrd[cas_aux]!=OFFBOARD) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
                         //if (!m) return NULL;
@@ -689,7 +689,7 @@ MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count ){
 				dir = PceDirSlide[pceIndex][index];
 				t_sq = sq + dir;
 				
-				while(FILAsBrd[t_sq]==OFFBOARD) {				
+				while(FILAsBrd[t_sq]!=OFFBOARD) {				
 					
 					if(t->pieces[t_sq] != EMPTY) {
 						if( pieceColour(t->pieces[t_sq]) !=side) {
