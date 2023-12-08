@@ -374,7 +374,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
    
    
     //bucle caballo blanco
-
+    printf("COUNT VALE: %d\n", *count)
    if(side==WHITE){
 	for(i=0; i< t->pceNum[2] ; ++i) {
 			
@@ -391,7 +391,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
                        
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
-                        if (!m) return NULL;
+                        //if (!m) return NULL;
                       
 
                         m[*count] = insert_move(EMPTY,cas,cas_aux,2, pce_cas_aux, EMPTY, EMPTY);
@@ -403,6 +403,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 			}
 		}
    }
+   printf("COUNT VALE CABALLO: %d\n", *count)
 
 
     //bucle caballo negro
@@ -420,7 +421,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
-                        if (!m) return NULL;
+                        //if (!m) return NULL;
                       
 
                         m[*count] = insert_move(EMPTY,cas,cas_aux,bN, pce_cas_aux, EMPTY, EMPTY);
@@ -446,7 +447,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				if(FILAsBrd[cas_aux]==OFFBOARD) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
                         //m =(MOVE**) realloc(m, (*count +1)*sizeof(MOVE*));
-                        if (!m) return NULL;
+                        //if (!m) return NULL;
                       
 
                         m[*count] = insert_move(EMPTY,cas,cas_aux,wK, pce_cas_aux, EMPTY, EMPTY);
@@ -472,7 +473,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				if(FILAsBrd[cas_aux]==OFFBOARD) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
-                        if (!m) return NULL;
+                        //if (!m) return NULL;
                       
 
                         m[*count] = insert_move(EMPTY,cas,cas_aux,bK, pce_cas_aux, EMPTY, EMPTY);
