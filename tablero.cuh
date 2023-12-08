@@ -6,10 +6,10 @@
 #define RESET "\e[0m"
 
 //char PceChar[] = ".♙♘♗♖♕♔♟♞♝♜♛♚";
-char PceChar[] = ".PNBRQKpnbrqk";
-char SideChar[] = "wb-";
-char RankChar[] = "12345678";
-char FileChar[] = "abcdefgh";
+char __constant__ PceChar[] = ".PNBRQKpnbrqk";
+char __constant__ SideChar[] = "wb-";
+char __constant__ RankChar[] = "12345678";
+char __constant__ FileChar[] = "abcdefgh";
 
 int PieceBig[13] = { FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE };
 int PieceMaj[13] = { FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE };
