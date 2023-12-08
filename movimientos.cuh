@@ -942,7 +942,7 @@ int HacerJugada(TABLERO *t,MOVE *m){
     int aux,ksq;
 
 
-
+    printf("EL MOVIMIENTO ES estupido: %d a %d \n", m->from, m->to);
     if(!t||!m)return FALSE;
     aux=t->enroque;
 
