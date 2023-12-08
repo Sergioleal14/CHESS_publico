@@ -376,10 +376,11 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
     //bucle caballo blanco
     printf("COUNT VALE: %d\n", *count);
    if(side==WHITE){
+    printf("at least I know I am white");
 	for(i=0; i< t->pceNum[2] ; ++i) {
 			
             cas = t->pList[2][i];
-            
+            printf("cas es %d\n", cas);
 			
 			for(j = 0; j < 8;j++) {
 				dir = dircaballo[j];
