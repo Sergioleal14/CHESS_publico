@@ -265,9 +265,9 @@ extern __host__ __device__ int HacerJugada(TABLERO *t,MOVE *m);
 extern void DeshacerJugada(TABLERO *pos);
 extern __host__ __device__ void free_UNDO(S_UNDO * u);
 extern __host__ __device__ S_UNDO *create_UNDO (MOVE *jugada);
-extern MOVE *move_copy(MOVE*m);
+extern __host__ __device__ MOVE *move_copy(MOVE*m);
 extern __host__ __device__ MOVE *create_move();
-extern void free_move(MOVE *m);
+extern __host__ __device__ void free_move(MOVE *m);
 extern __host__ __device__ MOVE* insert_move(int castle, int from, int to, int pieza, int captura, int corona, int paso);
 int move_cmp(MOVE *m1, MOVE *m2);
 //comprobacion.c
