@@ -946,8 +946,9 @@ int HacerJugada(TABLERO *t,MOVE *m){
     if(!t||!m)return FALSE;
     aux=t->enroque;
 
-
+    printf("PASO 1");
     if(!(u = create_UNDO(m))) return FALSE;
+    printf("PASO 2");
     u->AlPaso = t->AlPaso;
     u->fiftyMove = t->fiftyMove;
     u->enroque = t->enroque;
