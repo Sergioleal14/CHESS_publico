@@ -1158,6 +1158,7 @@ int HacerJugada(TABLERO *t,MOVE *m){
     t->history[t->histcont] = u;
     t->histcont++;
     t->side = 1- t->side;
+    printf("SI TENGO CROMOSOMAS LLEGO AQUÍ\n");
     return TRUE;
 
 }
