@@ -374,7 +374,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
    
    
     //bucle caballo blanco
-    printf("COUNT VALE: %d\n", *count)
+    printf("COUNT VALE: %d\n", *count);
    if(side==WHITE){
 	for(i=0; i< t->pceNum[2] ; ++i) {
 			
@@ -403,7 +403,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 			}
 		}
    }
-   printf("COUNT VALE CABALLO: %d\n", *count)
+   printf("COUNT VALE CABALLO: %d\n", *count);
 
 
     //bucle caballo negro
