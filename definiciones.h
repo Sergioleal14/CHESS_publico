@@ -1,3 +1,6 @@
+#ifndef DEF_H
+#define DEF_H
+
 #include "stdlib.h"
 #include <stdio.h>
 #include <cuda.h>
@@ -230,7 +233,7 @@ extern void InitFILAsCOLsBrd();
 extern __host__ __device__ int pieceColour(int pce);
 extern void ResetBoard(TABLERO *pos);
 extern int LeerFen(char *fen, TABLERO *pos);
-extern void PrintBoard(const TABLERO *pos);
+extern __host__ __device__ void PrintBoard(const TABLERO *pos);
 extern void UpdateListsMaterial(TABLERO *pos);
 extern __host__ __device__ int CheckBoard(const TABLERO *pos);
 extern int C120a64(int c120);
@@ -284,3 +287,4 @@ int Mirror64(int sq64);
 MOVE* SearchPosition(TABLERO *pos, INFO  *info);
 static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MOVE** Best);
 
+#endif
