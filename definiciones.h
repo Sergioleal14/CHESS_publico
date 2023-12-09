@@ -269,16 +269,18 @@ extern __host__ __device__ int SqAttacked(const int sq, const int side, const TA
 extern __device__ __host__ int COLsBrd(int i){
 	#ifdef __CUDA_ARCH__
        return device_COLsBrd[i];
-    #endif
-    return host_COLsBrd[i];
+    #else
+    	return host_COLsBrd[i];
+	#endif
    
 }
 
 extern __device__ __host__ int FILAsBrd(int i){
 	#ifdef __CUDA_ARCH__
        return device_FILAsBrd[i];
+	#else
+    	return host_FILAsBrd[i];
 	#endif
-    return host_FILAsBrd[i];
 }
 
 

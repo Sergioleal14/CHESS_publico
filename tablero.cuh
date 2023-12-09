@@ -11,8 +11,9 @@ char host_PceChar[] = ".PNBRQKpnbrqk";
 extern __device__ __host__ int PceChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_PceChar[i];
-    #endif
-    return host_PceChar[i];
+    #else
+    	return host_PceChar[i];
+	#endif
    
 }
 
@@ -22,8 +23,9 @@ char host_SideChar[] = "wb-";
 extern __device__ __host__ int SideChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_SideChar[i];
-    #endif
-    return host_SideChar[i];
+    #else
+    	return host_SideChar[i];
+	#endif
    
 }
 
@@ -32,8 +34,9 @@ char host_RankChar[] = "12345678";
 extern __device__ __host__ int RankChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_RankChar[i];
+	#else
+    	return host_RankChar[i];
 	#endif
-    return host_RankChar[i];
    
 }
 
@@ -42,8 +45,9 @@ char host_FileChar[] = "abcdefgh";
 extern __device__ __host__ int FileChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_FileChar[i];
-    #endif
-    return host_FileChar[i];
+    #else
+    	return host_FileChar[i];
+	#endif
    
 }
 
