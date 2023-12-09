@@ -40,7 +40,8 @@ extern __device__ __host__ int PieceVal(int i){
 	#ifdef __CUDA_ARCH__
        return device_PieceVal[i];
     #endif
-    return host_PieceVal[i];
+	else
+    	return host_PieceVal[i];
 }
 
 /***********************************************************/
