@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "definiciones.h"
 //#define SQOFFBOARD(sq) (FILAsBrd[sq] == OFFBOARD)
-#define MATERIALFINAL (PieceVal[wR] + 2 * PieceVal[wN] + 2 * PieceVal[wP] + PieceVal[wK])
+#define MATERIALFINAL (PieceVal(wR) + 2 * PieceVal(wN) + 2 * PieceVal(wP) + PieceVal(wK))
 int PAREJAALFILES = 30;
 int colgado =-10;
 int doblado =-7;

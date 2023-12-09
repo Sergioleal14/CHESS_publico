@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "definiciones.h"
 #include <time.h>
-
+#include "parallel.cuh"
 
 #define INFINITO 50000
 #define JAQUEMATE 30000
@@ -31,16 +31,18 @@
 /* Descarta las ramas del arbol que en función de los valores de alfa y beta no hace falta explorar
 /***********************************************************/
 
-static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MOVE** Best) { 
+static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MOVE** Best, MOVE* arbol_jugadas, int num_jugadas, int arbol_depth) { 
 	int Legal = 0;
 	int Score = -INFINITO;
-	MOVE ** movelist;
+	MOVE * movelist;
 	int count,c;
 	int index=0;
 	double tiempo;
 	clock_t c1, c2,c3,c4;
+  int *acc_counts;
+  MOVE *arbol;
 
-
+  //printf("Entro en alfabeta, depth= %d\n",depth);
 	//ASSERT(CheckBoard(pos)); 
 
 	if(info->stop==TRUE){
@@ -70,7 +72,15 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 	
 	Score = -INFINITO;
 	
-    movelist = Generador_Movimientos(pos,&count); 
+  if (arbol_depth == 0){
+    movelist = Generador_Movimientos_GPU(pos,&count, &acc_counts, &arbol);
+    printf("JUGADAAAAA3, from: %d, to %d, piece %d\n", movelist[2].from, movelist[2].to, movelist[2].piezas[0]); 
+  }
+  else{
+    movelist = arbol_jugadas;
+    //printf("num jugadas: %d\n",num_jugadas);
+    count = num_jugadas;
+  }
       
     
 	c2 = clock();      /* clock 2*/
@@ -82,15 +92,18 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 
 	
 	
-	for(index= 1; index< count; index++) {	
+	for(index= 0; index< 1; index++) {	
 
 
 		c3=clock();
        
-        if ( HacerJugada(pos,movelist[index])==FALSE)  {
+        if ( HacerJugada(pos,&(movelist[index]))==FALSE)  {
             continue;
         }
-        
+    printf("Estamos en alfa beta\n");
+    PrintMove(&(movelist[3]));
+    PrintBoard(pos); 
+    printf("adios\n");  
 		Legal++;
 
 
@@ -100,15 +113,18 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 		tiempo = (double)(c4-c3); 
 		info->tiempo+= tiempo;
 		
-
-		Score = -AlphaBeta( -beta, -alpha, depth-1, pos, info, Best);		
-        DeshacerJugada(pos);
+    if(arbol_depth == 0){
+      Score = -AlphaBeta( -beta, -alpha, depth-1, pos, info, Best, &(arbol[acc_counts[index]]), acc_counts[index+1] - acc_counts[index], 1);
+    }
+    else{
+		  Score = -AlphaBeta( -beta, -alpha, depth-1, pos, info, Best, NULL, 0, 0);		
+    }
+    DeshacerJugada(pos);
 		if(Score >= beta) {
-			for(index=0; index<(count);index++){
-			free_move(movelist[index]);
-			}
-
-			free(movelist);
+			if(arbol_depth == 0){
+        free(movelist);
+        free(arbol);
+      }
 
 			return beta;
 		}
@@ -116,16 +132,17 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 			alpha = Score;
 			if(depth == info->depth && info->stop==FALSE){  /* IMPORTANTE*/
 				free_move(*Best);
-				(*Best)=move_copy(movelist[index]);
+				(*Best)=move_copy(&(movelist[index]));
 
 			}
 		}	
     }
-	for(index=0; index<(count);index++){
-		free_move(movelist[index]);
-		
-	}
-	free(movelist);
+
+  if(arbol_depth == 0){
+    free(movelist);
+    free(arbol);
+  }
+
 	if(Legal == 0) {
 		if(SqAttacked(pos->KingSq[pos->side],pos->side^1,pos)) {
 			
@@ -173,7 +190,7 @@ MOVE* SearchPosition(TABLERO *pos, INFO  *info) {
 
 
 	info->depth=1;
-	bestScore = AlphaBeta(-INFINITO, INFINITO, 1, pos, info,Best);
+	bestScore = AlphaBeta(-INFINITO, INFINITO, 1, pos, info,Best,NULL,0,0);
 	info->bestScore=bestScore;
 	
 	retorno=move_copy(*Best);
@@ -183,7 +200,7 @@ MOVE* SearchPosition(TABLERO *pos, INFO  *info) {
 	for(depth=2; depth<PROFUNDIDAD; depth++){
 		*Best=NULL;
 		info->depth=depth;
-		bestScore = AlphaBeta(-INFINITO, INFINITO, depth, pos, info,Best);
+		bestScore = AlphaBeta(-INFINITO, INFINITO, depth, pos, info,Best, NULL,0,0);
 		
 		if (info->stop== FALSE){
 			info->bestScore=bestScore;

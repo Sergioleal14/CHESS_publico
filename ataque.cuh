@@ -3,10 +3,48 @@
 #include "definiciones.h"
 //#define SQOFFBOARD(sq) (FILAsBrd[sq]==OFFBOARD)
 
-const __constant__ int KnDir[8] = { -8, -19,	-21, -12, 8, 19, 21, 12 };
-const __constant__ int RkDir[4] = { -1, -10,	1, 10 };
-const __constant__ int BiDir[4] = { -9, -11, 11, 9 };
-const __constant__ int KiDir[8] = { -1, -10,	1, 10, -9, -11, 11, 9 };
+
+const __constant__ int device_KnDir[8] = { -8, -19,	-21, -12, 8, 19, 21, 12 };
+const int host_KnDir[8] = { -8, -19,	-21, -12, 8, 19, 21, 12 };
+extern __ device__ __host__ int KnDir(int i){
+	#ifdef __CUDA_ARCH__
+       return device_KnDir[i];
+    else
+         return host_KnDir[i];
+   #endif
+}
+
+
+const __constant__ int device_RkDir[4] = { -1, -10,	1, 10 };
+const int host_RkDir[4] = { -1, -10,	1, 10 };
+extern __ device__ __host__ int RkDir(int i){
+	#ifdef __CUDA_ARCH__
+       return device_RkDir[i];
+    else
+         return host_RkDir[i];
+   #endif
+}
+
+
+const __constant__ int device_BiDir[4] = { -9, -11, 11, 9 };
+const int host_BiDir[4] = { -9, -11, 11, 9 };
+extern __ device__ __host__ int BiDir(int i){
+	#ifdef __CUDA_ARCH__
+       return device_BiDir[i];
+    else
+         return host_BiDir[i];
+   #endif
+}
+
+const __constant__ int device_KiDir[8] = { -1, -10,	1, 10, -9, -11, 11, 9 };
+const int host_KiDir[8] = { -1, -10,	1, 10, -9, -11, 11, 9 };
+extern __ device__ __host__ int KiDir(int i){
+	#ifdef __CUDA_ARCH__
+       return device_KiDir[i];
+    else
+         return host_KiDir[i];
+   #endif
+}
 
 /***********************************************************/
 /* Funcion: SqAttacked                           
@@ -36,7 +74,7 @@ int SqAttacked(const int sq, const int side, const TABLERO *pos) {
 	
 	// reyes
 	for(index = 0; index < 8; ++index) {		
-		pce = pos->pieces[sq + KiDir[index]];
+		pce = pos->pieces[sq + KiDir(index)];
 		if((pce == wK || pce == bK) && pieceColour(pce)==side) {
 			return TRUE;
 		}
@@ -56,7 +94,7 @@ int SqAttacked(const int sq, const int side, const TABLERO *pos) {
 	
 	// caballos
 	for(index = 0; index < 8; ++index) {		
-		pce = pos->pieces[sq + KnDir[index]];
+		pce = pos->pieces[sq + KnDir(index)];
 		if((pce == wN || pce == bN) && pieceColour(pce)==side) {
 			return TRUE;
 		}
@@ -64,7 +102,7 @@ int SqAttacked(const int sq, const int side, const TABLERO *pos) {
 	
 	// torres, damas
 	for(index = 0; index < 4; ++index) {		
-		dir = RkDir[index];
+		dir = RkDir(index);
 		t_sq = sq + dir;
 		pce = pos->pieces[t_sq];
 		while(pce != OFFBOARD) {
@@ -82,7 +120,7 @@ int SqAttacked(const int sq, const int side, const TABLERO *pos) {
 	
 	// alfiles y damas
 	for(index = 0; index < 4; ++index) {		
-		dir = BiDir[index];
+		dir = BiDir(index);
 		t_sq = sq + dir;
 		pce = pos->pieces[t_sq];
 		while(pce != OFFBOARD) {

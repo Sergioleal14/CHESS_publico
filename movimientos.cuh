@@ -3,7 +3,15 @@
 //#define SQOFFBOARD(sq) (FILAsBrd[sq]==OFFBOARD)
 #define PEONDIR 10
 #define MAX_M 256
-char PceChar2[] = ".PNBRQKPNBRQK";
+char __constant__ device_PceChar2[] = ".PNBRQKpnbrqk";
+char host_PceChar2[] = ".PNBRQKpnbrqk";
+extern __ device__ __host__ int PceChar2(int i){
+	#ifdef __CUDA_ARCH__
+       return device_PceChar2[i];
+    else
+         return host_PceChar2[i];
+   #endif
+}
 
 /***********************************************************/
 /* Funcion: create_move                             
@@ -383,7 +391,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				dir = dircaballo[j];
 				cas_aux = cas + dir;
                 
-				if(FILAsBrd[cas_aux]!=OFFBOARD) {	
+				if(FILAsBrd(cas_aux)!=OFFBOARD) {	
                      
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
@@ -414,7 +422,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				dir = dircaballo[j];
 				cas_aux = cas + dir;
 				
-				if((FILAsBrd[cas_aux]!=OFFBOARD)) {	
+				if((FILAsBrd(cas_aux)!=OFFBOARD)) {	
                     pce_cas_aux=t->pieces[cas_aux];
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
@@ -441,7 +449,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				cas_aux = cas + dir;
                 pce_cas_aux=t->pieces[cas_aux];
 				
-				if(FILAsBrd[cas_aux]!=OFFBOARD) {	
+				if(FILAsBrd(cas_aux)!=OFFBOARD) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==bP || pce_cas_aux==bN || pce_cas_aux== bB || pce_cas_aux== bR || pce_cas_aux==bQ || pce_cas_aux==bK){
                         //m =(MOVE**) realloc(m, (*count +1)*sizeof(MOVE*));
                         //if (!m) return NULL;
@@ -467,7 +475,7 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 				cas_aux = cas + dir;
                 pce_cas_aux=t->pieces[cas_aux];
 				
-				if(FILAsBrd[cas_aux]!=OFFBOARD) {	
+				if(FILAsBrd(cas_aux)!=OFFBOARD) {	
                     if(pce_cas_aux==EMPTY || pce_cas_aux==wP || pce_cas_aux==wN || pce_cas_aux== wB || pce_cas_aux== wR || pce_cas_aux==wQ || pce_cas_aux==wK){
                         //m = (MOVE**)realloc(m, (*count +1)*sizeof(MOVE*));
                         //if (!m) return NULL;
@@ -679,13 +687,13 @@ MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count ){
 		
 		for(pceNum = 0; pceNum < t->pceNum[pce]; ++pceNum) {
 			sq = t->pList[pce][pceNum];
-			if(FILAsBrd[sq]==OFFBOARD) return NULL;
+			if(FILAsBrd(sq)==OFFBOARD) return NULL;
 			
 			for(index = 0; index < NumDirSlide[pce]; ++index) {
 				dir = PceDirSlide[pceIndex][index];
 				t_sq = sq + dir;
 				
-				while(FILAsBrd[t_sq]!=OFFBOARD) {				
+				while(FILAsBrd(t_sq)!=OFFBOARD) {				
 					
 					if(t->pieces[t_sq] != EMPTY) {
 						if( pieceColour(t->pieces[t_sq]) !=side) {
@@ -783,7 +791,7 @@ int PrintMove(MOVE *mt){
         }
         else{
             if(mt->castle==EMPTY){
-            printf("%c", PceChar2[mt->piezas[0]]);
+            printf("%c", PceChar2(mt->piezas[0]));
             col = Cas_Col(mt->from);
             fila = Cas_Fila(mt->from);
             printf("%c%d", 'a'+col, fila +1);
@@ -882,7 +890,7 @@ int print_moves(MOVE **m, int count){
         }
         else{
             if(mt->castle==EMPTY){
-            printf("%c", PceChar2[mt->piezas[0]]);
+            printf("%c", PceChar2(mt->piezas[0]));
             col = Cas_Col(mt->from);
             fila = Cas_Fila(mt->from);
             printf("%c%d", 'a'+col, fila +1);

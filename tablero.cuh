@@ -6,10 +6,46 @@
 #define RESET "\e[0m"
 
 //char PceChar[] = ".♙♘♗♖♕♔♟♞♝♜♛♚";
-char __constant__ PceChar[] = ".PNBRQKpnbrqk";
-char __constant__ SideChar[] = "wb-";
-char __constant__ RankChar[] = "12345678";
-char __constant__ FileChar[] = "abcdefgh";
+char __constant__ device_PceChar[] = ".PNBRQKpnbrqk";
+char host_PceChar[] = ".PNBRQKpnbrqk";
+extern __ device__ __host__ int PceChar(int i){
+	#ifdef __CUDA_ARCH__
+       return device_PceChar[i];
+    else
+         return host_PceChar[i];
+   #endif
+}
+
+
+char __constant__ device_SideChar[] = "wb-";
+char host_SideChar[] = "wb-";
+extern __ device__ __host__ int SideChar(int i){
+	#ifdef __CUDA_ARCH__
+       return device_SideChar[i];
+    else
+         return host_SideChar[i];
+   #endif
+}
+
+char __constant__ device_RankChar[] = "12345678";
+char host_RankChar[] = "12345678";
+extern __ device__ __host__ int RankChar(int i){
+	#ifdef __CUDA_ARCH__
+       return device_RankChar[i];
+    else
+         return host_RankChar[i];
+   #endif
+}
+
+char __constant__ device_FileChar[] = "abcdefgh";
+char host_FileChar[] = "abcdefgh";
+extern __ device__ __host__ int FileChar(int i){
+	#ifdef __CUDA_ARCH__
+       return device_FileChar[i];
+    else
+         return host_FileChar[i];
+   #endif
+}
 
 int PieceBig[13] = { FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE };
 int PieceMaj[13] = { FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE };
@@ -67,7 +103,7 @@ void InitFILAsCOLsBrd() {
 /* Fila en la que esta la casilla
 /***********************************************************/
 int Cas_Fila (int cas){
-	return FILAsBrd[cas];
+	return FILAsBrd(cas);
 }
 
 
@@ -82,7 +118,7 @@ int Cas_Fila (int cas){
 /* Columna en la que esta la casilla
 /***********************************************************/
 int Cas_Col (int cas){
-	return COLsBrd[cas];
+	return COLsBrd(cas);
 }
 
 
@@ -189,7 +225,7 @@ int CheckBoard(const TABLERO *pos) {
 		esp_pceNum[esp_piece]++;
 		colour = pieceColour(esp_piece);
 		
-		esp_material[colour] += PieceVal[esp_piece];
+		esp_material[colour] += PieceVal(esp_piece);
 	}
 	
 	//for(esp_piece = wP; esp_piece <= bK; ++esp_piece) {
@@ -250,7 +286,7 @@ void UpdateListsMaterial(TABLERO *pos) {
 			if(pieza <= wK) color = WHITE;
 			else color = BLACK;
 
-			pos->material[color] += PieceVal[pieza];
+			pos->material[color] += PieceVal(pieza);
 
 			pos->pList[pieza][pos->pceNum[pieza]] = cas;
 
@@ -539,7 +575,7 @@ void PrintBoard(const TABLERO *pos) {
 		printf("%3c",'a'+col);	
 	}
 	printf("\n");
-	printf("side:%c\n",SideChar[pos->side]);
+	printf("side:%c\n",SideChar(pos->side));
 	if(pos->AlPaso==99)printf("AlPaso:NO\n");
 	else printf("AlPaso:%d\n",pos->AlPaso);
 	printf("castle:%c%c%c%c\n",
@@ -718,7 +754,7 @@ char * EscribirFen(TABLERO *t){
 				cont = 0;
 			}
 
-			fen[ln] = PceChar[pieza]; 
+			fen[ln] = PceChar(pieza); 
 			ln++; 
 			break;
 		}
