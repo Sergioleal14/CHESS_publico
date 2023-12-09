@@ -8,7 +8,7 @@
 //char PceChar[] = ".♙♘♗♖♕♔♟♞♝♜♛♚";
 char __constant__ device_PceChar[] = ".PNBRQKpnbrqk";
 char host_PceChar[] = ".PNBRQKpnbrqk";
-extern __ device__ __host__ int PceChar(int i){
+extern __device__ __host__ int PceChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_PceChar[i];
     else
@@ -19,7 +19,7 @@ extern __ device__ __host__ int PceChar(int i){
 
 char __constant__ device_SideChar[] = "wb-";
 char host_SideChar[] = "wb-";
-extern __ device__ __host__ int SideChar(int i){
+extern __device__ __host__ int SideChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_SideChar[i];
     else
@@ -29,7 +29,7 @@ extern __ device__ __host__ int SideChar(int i){
 
 char __constant__ device_RankChar[] = "12345678";
 char host_RankChar[] = "12345678";
-extern __ device__ __host__ int RankChar(int i){
+extern __device__ __host__ int RankChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_RankChar[i];
     else
@@ -39,7 +39,7 @@ extern __ device__ __host__ int RankChar(int i){
 
 char __constant__ device_FileChar[] = "abcdefgh";
 char host_FileChar[] = "abcdefgh";
-extern __ device__ __host__ int FileChar(int i){
+extern __device__ __host__ int FileChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_FileChar[i];
     else

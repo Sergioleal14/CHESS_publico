@@ -5,7 +5,7 @@
 #define MAX_M 256
 char __constant__ device_PceChar2[] = ".PNBRQKpnbrqk";
 char host_PceChar2[] = ".PNBRQKpnbrqk";
-extern __ device__ __host__ int PceChar2(int i){
+extern __device__ __host__ int PceChar2(int i){
 	#ifdef __CUDA_ARCH__
        return device_PceChar2[i];
     else

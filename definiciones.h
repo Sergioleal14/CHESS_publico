@@ -35,7 +35,7 @@
 static __constant__ int device_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
 static int host_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
 
-extern __ device__ __host__ int PieceVal(int i){
+extern __device__ __host__ int PieceVal(int i){
 	#ifdef __CUDA_ARCH__
        return device_PieceVal[i];
     else
@@ -265,7 +265,7 @@ int FinPartida(TABLERO *tab);
 extern __host__ __device__ int SqAttacked(const int sq, const int side, const TABLERO *pos);
 
 //movimientos.c
-extern __ device__ __host__ int COLsBrd(int i){
+extern __device__ __host__ int COLsBrd(int i){
 	#ifdef __CUDA_ARCH__
        return device_COLsBrd[i];
     else
@@ -273,7 +273,7 @@ extern __ device__ __host__ int COLsBrd(int i){
    #endif
 }
 
-extern __ device__ __host__ int FILAsBrd(int i){
+extern __device__ __host__ int FILAsBrd(int i){
 	#ifdef __CUDA_ARCH__
        return device_FILAsBrd[i];
     else
