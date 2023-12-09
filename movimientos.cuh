@@ -374,13 +374,10 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
    
    
     //bucle caballo blanco
-    printf("COUNT VALE: %d\n", *count);
    if(side==WHITE){
-    printf("at least I know I am white\n");
 	for(i=0; i< t->pceNum[2] ; ++i) {
 			
             cas = t->pList[2][i];
-            printf("cas es %d\n", cas);
 			
 			for(j = 0; j < 8;j++) {
 				dir = dircaballo[j];
@@ -404,7 +401,6 @@ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count){
 			}
 		}
    }
-   printf("COUNT VALE CABALLO: %d\n", *count);
 
 
     //bucle caballo negro
@@ -942,13 +938,10 @@ int HacerJugada(TABLERO *t,MOVE *m){
     int aux,ksq;
 
 
-    printf("EL MOVIMIENTO ES estupido: %d a %d \n", m->from, m->to);
     if(!t||!m)return FALSE;
     aux=t->enroque;
 
-    printf("PASO 1\n");
     if(!(u = create_UNDO(m))) return FALSE;
-    printf("PASO 2\n");
     u->AlPaso = t->AlPaso;
     u->fiftyMove = t->fiftyMove;
     u->enroque = t->enroque;
@@ -1159,7 +1152,6 @@ int HacerJugada(TABLERO *t,MOVE *m){
     t->history[t->histcont] = u;
     t->histcont++;
     t->side = 1- t->side;
-    printf("SI TENGO CROMOSOMAS LLEGO AQUÍ\n");
     return TRUE;
 
 }
