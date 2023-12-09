@@ -9,9 +9,9 @@ const int host_KnDir[8] = { -8, -19,	-21, -12, 8, 19, 21, 12 };
 extern __device__ __host__ int KnDir(int i){
 	#ifdef __CUDA_ARCH__
        return device_KnDir[i];
-    else
-         return host_KnDir[i];
-   #endif
+    #endif
+    return host_KnDir[i];
+   
 }
 
 
@@ -20,9 +20,9 @@ const int host_RkDir[4] = { -1, -10,	1, 10 };
 extern __device__ __host__ int RkDir(int i){
 	#ifdef __CUDA_ARCH__
        return device_RkDir[i];
-    else
-         return host_RkDir[i];
-   #endif
+    #endif
+    return host_RkDir[i];
+   
 }
 
 
@@ -31,9 +31,9 @@ const int host_BiDir[4] = { -9, -11, 11, 9 };
 extern __device__ __host__ int BiDir(int i){
 	#ifdef __CUDA_ARCH__
        return device_BiDir[i];
-    else
-         return host_BiDir[i];
-   #endif
+    #endif
+    return host_BiDir[i];
+   
 }
 
 const __constant__ int device_KiDir[8] = { -1, -10,	1, 10, -9, -11, 11, 9 };
@@ -41,9 +41,9 @@ const int host_KiDir[8] = { -1, -10,	1, 10, -9, -11, 11, 9 };
 extern __device__ __host__ int KiDir(int i){
 	#ifdef __CUDA_ARCH__
        return device_KiDir[i];
-    else
-         return host_KiDir[i];
-   #endif
+    #endif
+    return host_KiDir[i];
+   
 }
 
 /***********************************************************/

@@ -11,9 +11,9 @@ char host_PceChar[] = ".PNBRQKpnbrqk";
 extern __device__ __host__ int PceChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_PceChar[i];
-    else
-         return host_PceChar[i];
-   #endif
+    #endif
+    return host_PceChar[i];
+   
 }
 
 
@@ -22,9 +22,9 @@ char host_SideChar[] = "wb-";
 extern __device__ __host__ int SideChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_SideChar[i];
-    else
-         return host_SideChar[i];
-   #endif
+    #endif
+    return host_SideChar[i];
+   
 }
 
 char __constant__ device_RankChar[] = "12345678";
@@ -32,9 +32,9 @@ char host_RankChar[] = "12345678";
 extern __device__ __host__ int RankChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_RankChar[i];
-    else
-         return host_RankChar[i];
-   #endif
+	#endif
+    return host_RankChar[i];
+   
 }
 
 char __constant__ device_FileChar[] = "abcdefgh";
@@ -42,9 +42,9 @@ char host_FileChar[] = "abcdefgh";
 extern __device__ __host__ int FileChar(int i){
 	#ifdef __CUDA_ARCH__
        return device_FileChar[i];
-    else
-         return host_FileChar[i];
-   #endif
+    #endif
+    return host_FileChar[i];
+   
 }
 
 int PieceBig[13] = { FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE };

@@ -8,9 +8,9 @@ char host_PceChar2[] = ".PNBRQKpnbrqk";
 extern __device__ __host__ int PceChar2(int i){
 	#ifdef __CUDA_ARCH__
        return device_PceChar2[i];
-    else
-         return host_PceChar2[i];
-   #endif
+    #endif
+    return host_PceChar2[i];
+   
 }
 
 /***********************************************************/
