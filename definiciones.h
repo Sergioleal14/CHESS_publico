@@ -287,7 +287,6 @@ extern __host__ __device__ MOVE **Generador_Peones(TABLERO *t, MOVE **m, int *co
 extern __host__ __device__ MOVE **Generador_Movimientos(TABLERO *t, int *count);
 extern __host__ __device__ MOVE** Generador_RC(TABLERO *t, MOVE **m, int *count);
 int print_moves(MOVE **m, int count);
-void free_move(MOVE *m);
 extern __host__ __device__ MOVE ** Generador_Slide(TABLERO *t, MOVE **m, int *count );
 extern __host__ __device__ MOVE ** Generador_Enroques(TABLERO *t, MOVE **m, int *count );
 extern int PrintMove(MOVE *mt);
