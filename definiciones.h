@@ -38,9 +38,8 @@ static int host_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 32
 extern __device__ __host__ int PieceVal(int i){
 	#ifdef __CUDA_ARCH__
        return device_PieceVal[i];
-    else
-         return host_PieceVal[i];
-   #endif
+    #endif
+    return host_PieceVal[i];
 }
 
 /***********************************************************/
