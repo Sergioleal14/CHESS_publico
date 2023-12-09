@@ -32,8 +32,8 @@
 /* Array que le da un valor material a cada pieza. Cada posición corresponde a PieceVal[pieza]
 /***********************************************************/
 
-static __constant__ int device_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
-static int host_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
+__constant__ int device_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
+const int host_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
 
 extern __device__ __host__ int PieceVal(int i){
 	#ifdef __CUDA_ARCH__
