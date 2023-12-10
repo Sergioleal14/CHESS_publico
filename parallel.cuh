@@ -218,17 +218,18 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 	 //Hace falta guardar las jugadas en una array plano para que podamos recorrerlas.
 	 //Para saber de qué índice a qué indice se deben guardar creamos el array acc_counts
 	 // que en la posición i guarda el comienzo para el hilo i, y en la posición i+1 su final
-
-	pos_in = acc_counts[threadIdx.x];
-	pos_fin = acc_counts[threadIdx.x + 1];
-	for(int i = pos_in; i< pos_fin; i++){
-			jugada2[i] = *(mi_jugada2[i - pos_in + 1]);
-			//free_move(mi_jugada2[i-pos_in+1]);
+	if(threadIdx.x < *count1){
+		pos_in = acc_counts[threadIdx.x];
+		pos_fin = acc_counts[threadIdx.x + 1];
+		for(int i = pos_in; i< pos_fin; i++){
+				jugada2[i] = *(mi_jugada2[i - pos_in + 1]);
+				free_move(mi_jugada2[i-pos_in+1]);
+		}
+		free_move(mi_jugada2[0]);
+		free(mi_jugada2);
 	}
-	//free_move(mi_jugada2[0]);
-	//free(mi_jugada2);
 	Free_tablero(mi_tablero);
-
+	
 	return;
 }
 
