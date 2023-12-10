@@ -1,3 +1,6 @@
+#ifndef PARALLEL_CUH
+#define PARALLEL_CUH
+
 
 #include <stdio.h>
 #include <cuda.h>
@@ -60,7 +63,7 @@ void cuda_create_tablero(TABLERO *tab, TABLERO **d_tab){
 
 	cudaMemcpy(&((*d_tab)->history), &(history) ,sizeof(S_UNDO **), cudaMemcpyHostToDevice);
 
-	printf("pre copia valores\n");
+	//printf("pre copia valores\n");
 	cudaMemcpy(KingSq, tab->KingSq, 2*sizeof(int), cudaMemcpyHostToDevice);
 	cudaMemcpy(&((*d_tab)->side), &(tab->side), sizeof(int), cudaMemcpyHostToDevice);
 	cudaMemcpy(&((*d_tab)->AlPaso), &(tab->AlPaso), sizeof(int), cudaMemcpyHostToDevice);
@@ -76,7 +79,7 @@ void cuda_create_tablero(TABLERO *tab, TABLERO **d_tab){
 		cudaMemcpy(listas[i], tab->pList[i], 10*sizeof(int), cudaMemcpyHostToDevice);
 	}
 
-	printf("fin de la copia\n");
+	//printf("fin de la copia\n");
 }
 
 void cuda_copy_tablero(TABLERO *tab, TABLERO *d_tab){
@@ -124,7 +127,7 @@ __device__ void copy_tablero(TABLERO *dest, TABLERO *src){
 	}
 
 	//Ver que hacer con los UNDOS
-	
+
 }
 
 void cuda_retrieve_jugadas(MOVE ***host, MOVE **device,int count){
@@ -165,7 +168,7 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 
   if(threadIdx.x == 0){
 			PrintBoard(mi_tablero);
-			
+
 		  jugada1_local = Generador_Movimientos(mi_tablero,count1);
       for (i=1; i < *count1; i++){
 
@@ -176,15 +179,13 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 	}
 
 	__syncthreads();
-	
+
 	//Si no hay juagadas posibles es mate
 	// En el código de Pprog siempre generábamos al menos un movimiento para evitar NULLs.
 	// Por lo tanto, es primer movimiento es nulo.
 	if (*count1 <= 1) return;
 
 	if(threadIdx.x < *count1){
-		printf("SAN PITO PATO\n");
-		printf("VOY A LLAMAR A HACER JUGADA: te paso %d a %d\n", (jugada1[threadIdx.x]).from, (jugada1[threadIdx.x]).to);
 		HacerJugada(mi_tablero, &jugada1[threadIdx.x]);
 		mi_jugada2 = Generador_Movimientos(mi_tablero,&counts[threadIdx.x +1]);
 	}
@@ -195,7 +196,7 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 
 	__syncthreads();
 	//¡Pensar en mates!
-	
+
 	if(threadIdx.x == 0){
 			printf("acumulado\n");
 			acc_counts[0] = 0;
@@ -222,6 +223,83 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 	return;
 }
 
+void funcion_prueba(MOVE* m){
+	printf("JUGADAAAAA2, from: %d, to %d, piece %d\n", m->from, m->to, m->piezas[0]);
+}
+
+int PrintMove2(MOVE *mt){
+
+    int col, fila;
+		printf("JUGADAAAAA4, from: %d, to %d, piece %d\n", mt->from, mt->to, mt->piezas[0]);
+    if (!mt) return -1;
+
+        //primero ver el enroque
+        //Después vemos las piezas:
+        if(mt->piezas[0] == wP || mt->piezas[0] == bP){
+						printf("JUGADAAAAA5, from: %d, to %d, piece %d\n", Cas_Col(mt->from), Cas_Fila(mt->from), Cas_Fila(31));
+						printf("prueba %d\n",COLsBrd(0));
+            col = Cas_Col(mt->from);
+            fila = Cas_Fila(mt->from);
+            printf("%c%d", 'a'+col, fila +1);
+
+            //Captura
+            if(mt->piezas[1] != EMPTY && mt->piezas[1] != OFFBOARD) printf("x");
+
+            col = Cas_Col(mt->to);
+            fila = Cas_Fila(mt->to);
+            printf("%c%d", 'a'+col, fila +1);
+
+            //Coronación
+            if(mt->piezas[2] != EMPTY){
+                switch (mt->piezas[2])
+                {
+                case wN:
+                case bN:
+                    printf("=N");
+                    break;
+                case wB:
+                case bB:
+                    printf("=B");
+                    break;
+                case wR:
+                case bR:
+                    printf("=R");
+                    break;
+                case wQ:
+                case bQ:
+                    printf("=Q");
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        else{
+            if(mt->castle==EMPTY){
+            printf("%c", PceChar2(mt->piezas[0]));
+            col = Cas_Col(mt->from);
+            fila = Cas_Fila(mt->from);
+            printf("%c%d", 'a'+col, fila +1);
+
+            //Captura
+            if(mt->piezas[1] != EMPTY && mt->piezas[1] != OFFBOARD) printf("x");
+
+            col = Cas_Col(mt->to);
+            fila = Cas_Fila(mt->to);
+            printf("%c%d", 'a'+col, fila +1);
+            }
+            else{
+                if(mt->castle==WKCA)printf("WKCA");
+                else if(mt->castle==WQCA)printf("WQCA");
+                else if(mt->castle==BKCA)printf("BKCA");
+                else if(mt->castle==BQCA)printf("BQCA");
+
+            }
+
+        }
+        return OK;
+    }
+
 
 MOVE* Generador_Movimientos_GPU(TABLERO* tab, int* count1, int** acc_counts, MOVE **jugadas){
 	TABLERO *d_tab;
@@ -244,7 +322,7 @@ MOVE* Generador_Movimientos_GPU(TABLERO* tab, int* count1, int** acc_counts, MOV
 	}
 
 	cudaMalloc((void **)&d_count2, sizeof(int));
-	cudaMalloc((void **)&d_acc_counts, MAX_2MOVES*sizeof(int));
+	cudaMalloc((void **)&d_acc_counts, MAX_MOVES*sizeof(int));
 	cudaMalloc((void **)&d_jugada1, MAX_MOVES*sizeof(MOVE));
 	cudaMalloc((void **)&d_jugada2, MAX_2MOVES*sizeof(MOVE));
 
@@ -259,8 +337,9 @@ MOVE* Generador_Movimientos_GPU(TABLERO* tab, int* count1, int** acc_counts, MOV
 
 	error = cudaMemcpy(jugada1, d_jugada1, MAX_MOVES*sizeof(MOVE), cudaMemcpyDeviceToHost);
 	error = cudaMemcpy(jugada2, d_jugada2, MAX_2MOVES*sizeof(MOVE), cudaMemcpyDeviceToHost);
+	error = cudaMemcpy(*acc_counts, d_acc_counts, MAX_MOVES*sizeof(int), cudaMemcpyDeviceToHost);
 	printf("%s\n",cudaGetErrorString(error));
-	
+
 	printf("Count1 es %d\n",*count1);
 	printf("Count2 es %d\n",*count2);
 
@@ -272,5 +351,12 @@ MOVE* Generador_Movimientos_GPU(TABLERO* tab, int* count1, int** acc_counts, MOV
 
 	free(count2);
 	*jugadas = jugada2;
+	printf("JUGADAAAAA, from: %d, to %d, piece %d\n", jugada1[2].from, jugada1[2].to, jugada1[2].piezas[0]);
+	MOVE *m = &(jugada1[2]);
+	funcion_prueba(m);
+
+	PrintMove2(&(jugada1[2]));
 	return jugada1;
 }
+
+#endif
