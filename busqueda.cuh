@@ -93,7 +93,7 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 
 	
 	//////printf("Estamos en alfa beta\n");
-	for(index= 0; index< 4; index++) {	
+	for(index= 0; index<count; index++) {	
 
 
 		c3=clock();
