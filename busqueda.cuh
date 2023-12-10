@@ -91,7 +91,7 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 	info->tiempo+= tiempo;
 
 	
-	
+	printf("Estamos en alfa beta\n");
 	for(index= 0; index< 1; index++) {	
 
 
@@ -100,7 +100,7 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
         if ( HacerJugada(pos,&(movelist[index]))==FALSE)  {
             continue;
         }
-    printf("Estamos en alfa beta\n");
+    
     PrintMove(&(movelist[3]));
     PrintBoard(pos); 
     printf("adios\n");  
