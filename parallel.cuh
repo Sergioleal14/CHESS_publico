@@ -227,7 +227,7 @@ void funcion_prueba(MOVE* m){
 	//printf("JUGADAAAAA2, from: %d, to %d, piece %d\n", m->from, m->to, m->piezas[0]);
 }
 
-int //PrintMove2(MOVE *mt){
+int PrintMove2(MOVE *mt){
 
     int col, fila;
 		//printf("JUGADAAAAA4, from: %d, to %d, piece %d\n", mt->from, mt->to, mt->piezas[0]);
