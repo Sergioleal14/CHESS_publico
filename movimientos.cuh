@@ -945,8 +945,8 @@ int print_moves(MOVE **m, int count){
 int HacerJugada(TABLERO *t,MOVE *m){
     S_UNDO *u;
     int aux,ksq;
-    printf("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n");
-    printf("VOY A HACER LA JUGADA: %d a %d\n", m->from, m->to);
+    //printf("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n");
+    //printf("VOY A HACER LA JUGADA: %d a %d\n", m->from, m->to);
     if(!t||!m)return FALSE;
     aux=t->enroque;
 
