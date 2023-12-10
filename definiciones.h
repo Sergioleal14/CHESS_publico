@@ -36,14 +36,7 @@
 __constant__ int device_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
 const int host_PieceVal[13]= { 0, 100, 325, 325, 550, 1000, 50000, 100, 325, 325, 550, 1000, 50000  };
 
-extern __device__ __host__ int PieceVal(int i){
-	#ifdef __CUDA_ARCH__
-       return device_PieceVal[i];
-    
-	#else
-    	return host_PieceVal[i];
-	#endif
-}
+extern __device__ __host__ int PieceVal(int i);
 
 /***********************************************************/
 /* Enumeraciones                             
@@ -266,22 +259,9 @@ int FinPartida(TABLERO *tab);
 extern __host__ __device__ int SqAttacked(const int sq, const int side, const TABLERO *pos);
 
 //movimientos.c
-extern __device__ __host__ int COLsBrd(int i){
-	#ifdef __CUDA_ARCH__
-       return device_COLsBrd[i];
-    #else
-    	return host_COLsBrd[i];
-	#endif
-   
-}
+extern __device__ __host__ int COLsBrd(int i);
 
-extern __device__ __host__ int FILAsBrd(int i){
-	#ifdef __CUDA_ARCH__
-       return device_FILAsBrd[i];
-	#else
-    	return host_FILAsBrd[i];
-	#endif
-}
+extern __device__ __host__ int FILAsBrd(int i);
 
 
 

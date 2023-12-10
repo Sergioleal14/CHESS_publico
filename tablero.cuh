@@ -56,6 +56,32 @@ int PieceMaj[13] = { FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE,
 int PieceMin[13] = { FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE };
 int PieceCol[13] = { BOTH, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK };
 
+extern __device__ __host__ int PieceVal(int i)
+{
+	#ifdef __CUDA_ARCH__
+       return device_PieceVal[i];
+    
+	#else
+    	return host_PieceVal[i];
+	#endif
+}
+
+extern __device__ __host__ int COLsBrd(int i){
+	#ifdef __CUDA_ARCH__
+       return device_COLsBrd[i];
+    #else
+    	return host_COLsBrd[i];
+	#endif
+   
+}
+
+extern __device__ __host__ int FILAsBrd(int i){
+	#ifdef __CUDA_ARCH__
+       return device_FILAsBrd[i];
+	#else
+    	return host_FILAsBrd[i];
+	#endif
+}
 
 
 
@@ -73,7 +99,7 @@ int PieceCol[13] = { BOTH, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, BLACK, BLAC
 /* Inicializa los arrays globales
 /***********************************************************/
 
-void InitFILAsCOLsBrd() {
+/*void InitFILAsCOLsBrd() {
 	
 	int index = 0;
 	int col = COL_A;
@@ -94,7 +120,7 @@ void InitFILAsCOLsBrd() {
 		}
 	}
 
-}
+}*/
 
 /***********************************************************/
 /* Función: Cas_Fila              
