@@ -42,7 +42,7 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
     int *acc_counts;
     MOVE *arbol;
 
-  //printf("Entro en alfabeta, depth= %d\n",depth);
+    printf("Entro en alfabeta, depth= %d\n",depth);
 	//ASSERT(CheckBoard(pos)); 
 
 	if(info->stop==TRUE){
