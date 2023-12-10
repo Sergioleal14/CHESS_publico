@@ -101,7 +101,7 @@ __device__ void copy_tablero(TABLERO *dest, TABLERO *src){
 	dest->side = src->side;
 	dest->AlPaso = src->AlPaso;
 	dest->fiftyMove = src->fiftyMove;
-	dest->histcont= src->histcont;
+	dest->histcont= 0;
 	dest->j_real = src->j_real;
 	dest->enroque = src->enroque;
 
@@ -219,7 +219,7 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 	for(int i = pos_in; i< pos_fin; i++){
 			jugada2[i] = *(mi_jugada2[i - pos_in + 1]);
 	}
-	//Free_tablero(mi_tablero);
+	Free_tablero(mi_tablero);
 
 	return;
 }
