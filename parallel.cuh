@@ -164,7 +164,7 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 	//printf("le toca a %d\n", t->side);
 
   if(threadIdx.x == 0){
-			PrintBoard(mi_tablero);
+			//PrintBoard(mi_tablero);
 			
 		  jugada1_local = Generador_Movimientos(mi_tablero,count1);
       for (i=1; i < *count1; i++){
