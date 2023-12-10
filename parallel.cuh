@@ -225,7 +225,7 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 			free_move(mi_jugada2[i-pos_in+1]);
 	}
 	free_move(mi_jugada2[0]);
-	free(mi_jugada2)
+	free(mi_jugada2);
 	Free_tablero(mi_tablero);
 
 	return;
