@@ -42,7 +42,8 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
     int *acc_counts;
     MOVE *arbol;
 
-    printf("Entro en alfabeta, depth= %d\n",depth);
+	PrintBoard(pos); 
+    //printf("Entro en alfabeta, depth= %d\n",depth);
 	//ASSERT(CheckBoard(pos)); 
 
 	if(info->stop==TRUE){
@@ -74,11 +75,11 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 	
   if (arbol_depth == 0){
     movelist = Generador_Movimientos_GPU(pos,&count, &acc_counts, &arbol);
-    printf("JUGADAAAAA3, from: %d, to %d, piece %d\n", movelist[0].from, movelist[0].to, movelist[0].piezas[0]); 
+    ////printf("JUGADAAAAA3, from: %d, to %d, piece %d\n", movelist[0].from, movelist[0].to, movelist[0].piezas[0]); 
   }
   else{
     movelist = arbol_jugadas;
-    //printf("num jugadas: %d\n",num_jugadas);
+    ////printf("num jugadas: %d\n",num_jugadas);
     count = num_jugadas;
   }
       
@@ -91,8 +92,8 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 	info->tiempo+= tiempo;
 
 	
-	printf("Estamos en alfa beta\n");
-	for(index= 0; index< 1; index++) {	
+	//////printf("Estamos en alfa beta\n");
+	for(index= 0; index< 4; index++) {	
 
 
 		c3=clock();
@@ -101,9 +102,9 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
             continue;
         }
     
-    PrintMove(&(movelist[3]));
-    PrintBoard(pos); 
-    printf("adios\n");  
+    //PrintMove(&(movelist[3]));
+    //PrintBoard(pos); 
+    //printf("adios\n");  
 		Legal++;
 
 
@@ -114,7 +115,7 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 		info->tiempo+= tiempo;
 		
     if(arbol_depth == 0){
-		printf("ACCC COUNTS: %d\n", acc_counts[index]);
+		//printf("ACCC COUNTS: %d\n", acc_counts[index]);
       Score = -AlphaBeta( -beta, -alpha, depth-1, pos, info, Best, &(arbol[acc_counts[index]]), acc_counts[index+1] - acc_counts[index], 1);
     }
     else{
@@ -209,12 +210,12 @@ MOVE* SearchPosition(TABLERO *pos, INFO  *info) {
 			free(retorno);
 			retorno=move_copy(*Best);
 			free(*Best);
-			PrintMove(retorno);
+			//PrintMove(retorno);
 		}else {
 			free(*Best);
 			break;
 		}
-		printf("	Depth: %d\n", depth);
+		//printf("	Depth: %d\n", depth);
 	}
 
 	free(Best);
