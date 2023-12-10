@@ -74,7 +74,7 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 	
   if (arbol_depth == 0){
     movelist = Generador_Movimientos_GPU(pos,&count, &acc_counts, &arbol);
-    printf("JUGADAAAAA3, from: %d, to %d, piece %d\n", movelist[2].from, movelist[2].to, movelist[2].piezas[0]); 
+    printf("JUGADAAAAA3, from: %d, to %d, piece %d\n", movelist[0].from, movelist[0].to, movelist[0].piezas[0]); 
   }
   else{
     movelist = arbol_jugadas;
@@ -114,6 +114,7 @@ static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MO
 		info->tiempo+= tiempo;
 		
     if(arbol_depth == 0){
+		printf("ACCC COUNTS: %d\n", acc_counts[index]);
       Score = -AlphaBeta( -beta, -alpha, depth-1, pos, info, Best, &(arbol[acc_counts[index]]), acc_counts[index+1] - acc_counts[index], 1);
     }
     else{
