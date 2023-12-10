@@ -196,7 +196,7 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 	else{
 			counts[threadIdx.x + 1] = -1;
 			acc_counts[threadIdx.x + 1] = 0;
-			return;
+			//return;
 	}
 
 	__syncthreads();
