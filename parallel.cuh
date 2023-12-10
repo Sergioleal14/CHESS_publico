@@ -173,12 +173,12 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
       for (i=1; i < *count1; i++){
 
         jugada1[i-1] = *(jugada1_local[i]);
-		//free_move(jugada1_local[i]);
+		free_move(jugada1_local[i]);
       }
 			*count1 = *count1-1;
 			counts[0] = 0;
-			//free_move(jugada1_local[0]);
-			//free(jugada1_local);
+			free_move(jugada1_local[0]);
+			free(jugada1_local);
 	}
 	
 
