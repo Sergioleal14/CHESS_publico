@@ -946,7 +946,7 @@ int HacerJugada(TABLERO *t,MOVE *m){
     S_UNDO *u;
     int aux,ksq;
 
-
+    printf("VOY A HACER LA JUGADA: %d a %d\n", m->from, m->to);
     if(!t||!m)return FALSE;
     aux=t->enroque;
 
