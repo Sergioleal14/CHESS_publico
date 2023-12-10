@@ -277,7 +277,6 @@ MOVE* Generador_Movimientos_GPU(TABLERO* tab, int* count1, int** acc_counts, MOV
 	*jugadas = jugada2;
 	//printf("JUGADAAAAA, from: %d, to %d, piece %d\n", jugada1[2].from, jugada1[2].to, jugada1[2].piezas[0]);
 	MOVE *m = &(jugada1[2]);
-	funcion_prueba(m);
 
 	//PrintMove2(&(jugada1[2]));
 	return jugada1;
