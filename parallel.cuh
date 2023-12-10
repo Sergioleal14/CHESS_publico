@@ -183,7 +183,7 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 	if (*count1 <= 1) return;
 
 	if(threadIdx.x < *count1){
-		printf("VOY A LLAMAR A HACER JUGADA: te paso %d a %d\n", (jugada1[threadIdx.x])->from, (jugada1[threadIdx.x])->to);
+		printf("VOY A LLAMAR A HACER JUGADA: te paso %d a %d\n", (jugada1[threadIdx.x]).from, (jugada1[threadIdx.x]).to);
 		HacerJugada(mi_tablero, &jugada1[threadIdx.x]);
 		mi_jugada2 = Generador_Movimientos(mi_tablero,&counts[threadIdx.x +1]);
 	}
