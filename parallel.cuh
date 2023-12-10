@@ -201,8 +201,8 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 			//printf("acumulado\n");
 			acc_counts[0] = 0;
 			for(i = 1, acc = 0; (i< NUM_HILOS + 1) & (counts[i] != -1) ;i++){
-					acc += counts[i] - 1;
-					acc_counts[i] = acc;
+				acc += counts[i] - 1;
+				acc_counts[i] = acc;
 					//printf("%d, ",acc_counts[i]);
 			}
 			*count2 = acc;
@@ -219,6 +219,7 @@ __global__ void generar_GPU(TABLERO *t, MOVE *jugada1,int *count1,MOVE *jugada2,
 	for(int i = pos_in; i< pos_fin; i++){
 			jugada2[i] = *(mi_jugada2[i - pos_in + 1]);
 	}
+	Free_tablero(mi_tablero);
 
 	return;
 }
@@ -274,6 +275,7 @@ MOVE* Generador_Movimientos_GPU(TABLERO* tab, int* count1, int** acc_counts, MOV
 	cudaFree(d_jugada2);
 
 	free(count2);
+	
 	*jugadas = jugada2;
 	//printf("JUGADAAAAA, from: %d, to %d, piece %d\n", jugada1[2].from, jugada1[2].to, jugada1[2].piezas[0]);
 	MOVE *m = &(jugada1[2]);
