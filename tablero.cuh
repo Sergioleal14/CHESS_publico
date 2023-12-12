@@ -14,7 +14,6 @@ extern __device__ __host__ int PceChar(int i){
     #else
     	return host_PceChar[i];
 	#endif
-   
 }
 
 
@@ -25,8 +24,7 @@ extern __device__ __host__ int SideChar(int i){
        return device_SideChar[i];
     #else
     	return host_SideChar[i];
-	#endif
-   
+	#endif   
 }
 
 char __constant__ device_RankChar[] = "12345678";
