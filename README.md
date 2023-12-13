@@ -21,3 +21,4 @@ En primer lugar, para la ejecución de la versión sobre la que se puede juagr, 
 %xterm
 
 Una vez hecho esto, se puede navegar desde la terminal para realizar la ejecución de el ejecutable _chess_ desde _/old_
+Para más detalles se ha adjuntado también el propio cuaderno del colab (fichero .ipynb) sobre el que ya se encuentran todos estos detalles, junto con la forma de compilar y ejecutar.
