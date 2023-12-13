@@ -1,52 +1,23 @@
 
+# INSTRUCCIONES USO DE CÓDIGO PARALELIZADO
 
-# INSTRUCCIONES MÓDULO DE AJEDREZ 
+Si se requiere de las instrucciones para ejecutar e utilizar el módulo, estas se pueden ver sobre el Readme de la rama
+antigua. 
 
-## INICIO DE PARTIDA
+A continuación se adjunta el contenido y epliación de las celdas de código necesarias para poder clonar y utilizar el repositorio completo. Dicho repositorio consta de una rama old en la que se encuentra el código antiguo, sin paralelizar mediante cuda y de una rama main en la cual se encuentra el código nuevo. 
 
-Al comienzo de la partida se debe de seleccionar bando, utilizando w para jugar con blancas y b con negras (pulsando ENTER a continuación).
+Se recomienda utilizar un entorno de ejcución como Google Colab, en el que disponer de una GPU para que el funcionamiento sea correcto. 
 
-## MOVIMIENTOS
+Los siguientes comandos clonan sobre el directorio _/content_, ya existente en todas las versiones de Colab, el repositorio principal. Además se crea una carpeta dentro del repositorio llamada _/old_ en la que se puede encontrar el código de la version anterior.
 
-El formato utilizado para introducir movmientos por teclado será el siguiente:
-(P)from(x)to(=C) donde se da que:
- - P corresponde a la pieza que se omite si se mueve un peón (en mayúsculas)
- - from corresponde a la casilla desde la que se mueve la pieza (en minúsculas)
- - x indica si hay captura. Si no hay captura se omite
- - to corresponde a la casilla a la que va la pieza (en minúsculas)
- - =C se escribe si hay una coronación y en C se escribe la pieza en la que se corona (en mayúsculas)
- - En el caso de que el movimiento sea un enroque se escribirá 0-0 para el enroque en el ala de rey y 0-0-0 para el enroque en el ala de dama
+%cd /content
+!rm -rf ./*
+!git clone -b old --single-branch https://github.com/Sergioleal14/CHESS_publico
 
-### EJEMPLOS
+En primer lugar, para la ejecución de la versión sobre la que se puede juagr, dentro del código antiguo, es necesario instalar una terminal auxiliar sobre Colab ya que este no dispone de ella y se requiere de una interfaz de usuario y de un _stdin_ para introducir los movimientos (toda dicha sintaxis se puede encontrar en el Readme.md de la carpeta _/old_). 
 
-* Peon de e2 a e4: e2e4
-* Caballo de b1 a c3: Nb1c3
-* Torre de h8 a h2: Rh8h2
-* Alfil de h2 a g3 y captura: Bh2xg3
-* Reina de h5 a h1: Qh5h1
-* Enroque corto(de rey): 0-0
-* Peon de h7 a h8 y corona en dama: h7h8=Q
+!pip install colab-xterm
+%load_ext colabxterm
+%xterm
 
-
-## COMANDOS ADICIONALES
-
-### exit: 
-La partida finaliza en la situación en la que esté
-
-### mod:
-
-Aunque sea el turno del jugador, puede utilizar mod para que mueva la máquina pero cuidado, si juegas con blancas por ejemplo y utilizas mod, debes de utilizar mod en el turno de las negras también, y ya luego tras tu movimiento el módulo moverá solo.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Una vez hecho esto, se puede navegar desde la terminal para realizar la ejecución de el ejecutable _chess_ desde _/old_

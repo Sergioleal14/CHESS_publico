@@ -232,7 +232,7 @@ int C120a64 (int c120){
 
 int CheckBoard(const TABLERO *pos) {   
 	
- 
+	
 	int esp_pceNum[13] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	int esp_material[2] = { 0, 0};
@@ -255,23 +255,6 @@ int CheckBoard(const TABLERO *pos) {
 		
 		esp_material[colour] += PieceVal(esp_piece);
 	}
-	
-	//for(esp_piece = wP; esp_piece <= bK; ++esp_piece) {
-		//ASSERT(esp_pceNum[esp_piece]==pos->pceNum[esp_piece]);	
-	//}
-	
-
-	//ASSERT(esp_material[WHITE]==pos->material[WHITE] && esp_material[BLACK]==pos->material[BLACK]);
-
-	
-	//ASSERT(pos->side==WHITE || pos->side==BLACK);
-
-	
-	//ASSERT(pos->AlPaso==NO_SQ || ( FILAsBrd[pos->AlPaso]==FILA_6 && pos->side == WHITE)
-		// || ( FILAsBrd[pos->AlPaso]==FILA_3 && pos->side == BLACK));
-	
-	//ASSERT(pos->pieces[pos->KingSq[WHITE]] == wK);
-	//ASSERT(pos->pieces[pos->KingSq[BLACK]] == bK);
 		 
 	return TRUE;	
 }
@@ -348,9 +331,7 @@ void UpdateListsMaterial(TABLERO *pos) {
 
 int LeerFen(char *fen, TABLERO *pos) {
 	
-	//ASSERT(fen!=NULL);
-	//ASSERT(pos!=NULL);
-	
+
 	int  fila = FILA_8, col = COL_A, piece = 0, count = 0, i = 0,  c64 = 0, c120 = 0;
 	short flag =0;
 	
@@ -406,8 +387,7 @@ int LeerFen(char *fen, TABLERO *pos) {
         }
 		fen++;
 	}
-	//ASSERT(*fen == 'w' || *fen == 'b');
-	
+
 	if(*fen == 'w') pos->side = WHITE;
 	else pos->side = BLACK;
 	fen += 2;
@@ -424,16 +404,9 @@ int LeerFen(char *fen, TABLERO *pos) {
         }
 	}
 	fen++;
-	
-	//ASSERT(pos->enroque>=0 && pos->enroque <= 15);
-	
 	if (*fen != '-') {        
 		col = fen[0] - 'a';
 		fila = fen[1] - '1';
-		
-		//ASSERT(col>=COL_A && col <= COL_H);
-		//ASSERT(fila>=FILA_1 && fila <= FILA_8);
-		
 		pos->AlPaso = FCCAS(col,fila);
 		fen++;	
     }
@@ -850,8 +823,6 @@ int Repetida(TABLERO *tab, int *times){
 	int i=0;
 	char *aux=NULL, *fen=NULL;
 
-	//ASSERT(tab!=NULL);
-
 	(*times)=1;
 
 	if(tab->histcont==0)return FALSE;
@@ -894,8 +865,6 @@ int esTablas(TABLERO *tab){
 
 	int flag=0, flag1=0, cont=0;
 
-	//ASSERT(tab!=NULL);
-
 	if(tab->fiftyMove >= 100)return TRUE;
 	
 	flag=Repetida(tab, &cont);
@@ -929,8 +898,6 @@ int esTablas(TABLERO *tab){
 /***********************************************************/
 
 int InsufMat(TABLERO *tab){
-
-	//ASSERT(tab!=NULL);
 
 	if(tab->material[BLACK]==50000 && tab->material[WHITE]==50000)return TRUE;
 	if(tab->material[WHITE]==50325 && tab->material[BLACK]==50000)return TRUE;
