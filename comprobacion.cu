@@ -21,10 +21,6 @@ long nHojas;
 void Comprobacion(int prof, TABLERO *pos) {
 
     int count=0;
-
-
-    //ASSERT(CheckBoard(pos));  
-
 	if(prof == 0) {
         nHojas++;
         return;
@@ -68,8 +64,6 @@ void Comprobacion(int prof, TABLERO *pos) {
 
 
 void Comprobaciontest(int prof, TABLERO *pos) {
-
-    //ASSERT(CheckBoard(pos));
 
 	PrintBoard(pos);
 	printf("\nEmpezando el test para profundidad:%d\n",prof);	

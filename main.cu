@@ -28,12 +28,8 @@ int main() {
 	char *fen,jugadachar[512];
 	int i, valor;
 	INFO *info;
-
 	tab=Create_tablero();
-	//InitFILAsCOLsBrd();
-
 	LeerFen(START_FEN, tab);
-
 	Menu_juego(tab);
 	Free_tablero(tab);
 
