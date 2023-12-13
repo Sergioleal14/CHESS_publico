@@ -23,8 +23,6 @@ int main(void) {
   info.visited=0;
   info.stop=FALSE;
   info.depth = 2;
-  long time;
-
   int count;
 
   Best=(MOVE**)malloc(sizeof(MOVE*));
