@@ -31,7 +31,7 @@
 /* Descarta las ramas del arbol que en función de los valores de alfa y beta no hace falta explorar
 /***********************************************************/
 
-static int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MOVE** Best) { 
+int AlphaBeta(int alpha, int beta, int depth, TABLERO *pos, INFO *info,MOVE** Best) { 
 	int Legal = 0;
 	int Score = -INFINITO;
 	MOVE ** movelist;
